@@ -12,9 +12,9 @@ using System.Windows.Shapes;
 
 namespace TicTacToe
 {
-    public partial class Welcome : Window
+    public partial class WelcomeWindow : Window
     {
-        public Welcome()
+        public WelcomeWindow()
         {
             InitializeComponent();
         }
@@ -31,7 +31,7 @@ namespace TicTacToe
             }
             else if (boton.Name == "botonJvC")
             {
-
+                
             }
             else
             {
