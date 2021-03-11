@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TicTacToe"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Background="GhostWhite"
+        Background="PaleGoldenrod"
         WindowStartupLocation="CenterScreen"
         Title="Ta Te Ti" Height="350" Width="300">
 
@@ -14,7 +14,7 @@
         
         <!-- Apariencia de los botones -->
         <Style TargetType="Button">
-            <Setter Property="Background" Value="GhostWhite"/>
+            <Setter Property="Background" Value="WhiteSmoke"/>
             <Setter Property="BorderThickness" Value="0.5"/>
             <Setter Property="FontSize" Value="32"/>
         </Style>

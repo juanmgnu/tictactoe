@@ -1,9 +1,31 @@
-﻿namespace TicTacToe
-{
-    public class Jugador
-    {
-        public string Nombre { get; set; }
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
-        public int Puntaje { get; set; }
+namespace TicTacToe
+{
+    public class Jugador : INotifyPropertyChanged
+    {
+        private string nombre;
+
+        private int puntaje;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public string Nombre
+        {
+            get { return nombre; }
+            set { nombre = value; }
+        }
+
+        public int Puntaje
+        {
+            get { return puntaje; }
+            set { puntaje = value; NotifyPropertyChanged("Puntaje"); }
+        }
+
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

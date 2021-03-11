@@ -7,20 +7,26 @@ namespace TicTacToe
 {
     public partial class MainWindow : Window
     {
+        private Jugador jugador1;
+        private Jugador jugador2;
+
         private Simbolo[,] tablero;
 
         private bool juegoTerminado;
 
         private bool esTurnoDelHumano;
 
-        public MainWindow(string jugador1, string jugador2)
+        public MainWindow(string nombreJugador1, string nombreJugador2)
         {
             InitializeComponent();
-            
+
+            jugador1 = new Jugador() { Nombre = nombreJugador1, Puntaje = 0 };
+            jugador2 = new Jugador() { Nombre = nombreJugador2, Puntaje = 0 };
+
             DataContext = new
             {
-                jugador1 = new Jugador() { Nombre = jugador1 },
-                jugador2 = new Jugador() { Nombre = jugador2 }
+                jugador1,
+                jugador2
             };
 
             NuevaPartida();
@@ -62,7 +68,6 @@ namespace TicTacToe
 
             // Chequeo si hay ganador.
             ChequearGanador(fila, columna);
-
         }
 
         private void NuevaPartida()
@@ -90,7 +95,7 @@ namespace TicTacToe
             foreach (Button hijo in Board.Children)
             {
                 hijo.Content = String.Empty;
-                hijo.Background = Brushes.GhostWhite;
+                hijo.Background = Brushes.WhiteSmoke;
             }
         }
 
@@ -124,59 +129,99 @@ namespace TicTacToe
             if (filaCompleta)
             {
                 juegoTerminado = true;
-
-                if (fila == 0)
-                {
-                    ButtonTopLeft.Background = ButtonTopCenter.Background = ButtonTopRight.Background = Brushes.PaleGreen;
-                }
-                else if (fila == 1)
-                {
-                    ButtonMiddleLeft.Background = ButtonMiddleCenter.Background = ButtonMiddleRight.Background = Brushes.PaleGreen;
-                }
-                else
-                {
-                    ButtonBottomLeft.Background = ButtonBottomCenter.Background = ButtonBottomRight.Background = Brushes.PaleGreen;
-                }
+                ColorearFila(fila);
+                SumarPuntoAlGanador(tablero[fila, columna]);
             }
             else if (columnaCompleta)
             {
                 juegoTerminado = true;
-
-                if (columna == 0)
-                {
-                    ButtonTopLeft.Background = ButtonMiddleLeft.Background = ButtonBottomLeft.Background = Brushes.PaleGreen;
-                }
-                else if (columna == 1)
-                {
-                    ButtonTopCenter.Background = ButtonMiddleCenter.Background = ButtonBottomCenter.Background = Brushes.PaleGreen;
-                }
-                else
-                {
-                    ButtonTopRight.Background = ButtonMiddleRight.Background = ButtonBottomRight.Background = Brushes.PaleGreen;
-                }
+                ColorearColumna(columna);
+                SumarPuntoAlGanador(tablero[fila, columna]);
             }
             else if (diagonal1Completa)
             {
                 juegoTerminado = true;
-
-                ButtonTopLeft.Background = ButtonMiddleCenter.Background = ButtonBottomRight.Background = Brushes.PaleGreen;
+                ColorearDiagonal(1);
+                SumarPuntoAlGanador(tablero[fila, columna]);
             }
             else if (diagonal2Completa)
             {
                 juegoTerminado = true;
-
-                ButtonTopRight.Background = ButtonMiddleCenter.Background = ButtonBottomLeft.Background = Brushes.PaleGreen;
+                ColorearDiagonal(2);
+                SumarPuntoAlGanador(tablero[fila, columna]);
             }
             else if (esEmpate)
             {
                 juegoTerminado = true;
-
-                foreach (Button hijo in Board.Children)
-                {
-                    hijo.Background = Brushes.PaleTurquoise;
-                }
+                ColorearEmpate();
             }
         }
+
+        private void SumarPuntoAlGanador(Simbolo simbolo)
+        {
+            if (simbolo == Simbolo.X)
+            {
+                jugador1.Puntaje++;
+            }
+            else if (simbolo == Simbolo.O)
+            {
+                jugador2.Puntaje++;
+            }
+        }
+
+        private void ColorearFila(int fila)
+        {
+            if (fila == 0)
+            {
+                ButtonTopLeft.Background = ButtonTopCenter.Background = ButtonTopRight.Background = Brushes.PaleGreen;
+            }
+            else if (fila == 1)
+            {
+                ButtonMiddleLeft.Background = ButtonMiddleCenter.Background = ButtonMiddleRight.Background = Brushes.PaleGreen;
+            }
+            else
+            {
+                ButtonBottomLeft.Background = ButtonBottomCenter.Background = ButtonBottomRight.Background = Brushes.PaleGreen;
+            }
+        }
+
+        private void ColorearColumna(int columna)
+        {
+            if (columna == 0)
+            {
+                ButtonTopLeft.Background = ButtonMiddleLeft.Background = ButtonBottomLeft.Background = Brushes.PaleGreen;
+            }
+            else if (columna == 1)
+            {
+                ButtonTopCenter.Background = ButtonMiddleCenter.Background = ButtonBottomCenter.Background = Brushes.PaleGreen;
+            }
+            else
+            {
+                ButtonTopRight.Background = ButtonMiddleRight.Background = ButtonBottomRight.Background = Brushes.PaleGreen;
+            }
+        }
+
+        private void ColorearDiagonal(int diagonal)
+        {
+            if (diagonal == 1)
+            {
+                ButtonTopLeft.Background = ButtonMiddleCenter.Background = ButtonBottomRight.Background = Brushes.PaleGreen;
+            }
+            else
+            {
+                ButtonTopRight.Background = ButtonMiddleCenter.Background = ButtonBottomLeft.Background = Brushes.PaleGreen;
+            }
+        }
+
+        private void ColorearEmpate()
+        {
+            foreach (Button hijo in Board.Children)
+            {
+                hijo.Background = Brushes.PaleTurquoise;
+            }
+        }
+
+
 
     }
 }

@@ -35,8 +35,20 @@ namespace TicTacToe
             }
             else
             {
-                Close();
+                string mensaje = "¿Seguro que quiere salir?";
+                string titulo = "Salir de la aplicación";
+
+                MessageBoxButton botones = MessageBoxButton.YesNo;
+                MessageBoxImage icono = MessageBoxImage.Warning;
+
+                MessageBoxResult resultado = MessageBox.Show(mensaje, titulo, botones, icono);
+
+                if (resultado == MessageBoxResult.Yes)
+                {
+                    Close();
+                }
             }
+
 
         }
     }
