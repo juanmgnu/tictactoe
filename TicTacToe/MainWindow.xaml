@@ -12,16 +12,19 @@
 
     <Window.Resources>
         
-        <!-- Apariencia de los botones -->
+        <!-- Apariencia por defecto de los botones -->
         <Style TargetType="Button">
             <Setter Property="Background" Value="WhiteSmoke"/>
             <Setter Property="BorderThickness" Value="0.5"/>
             <Setter Property="FontSize" Value="32"/>
+            <Setter Property="Content" Value=""/>
+
+            <EventSetter Event="Click" Handler="ButtonClick"/>
         </Style>
 
-        <!-- Apariencia del texto -->
+        <!-- Apariencia por defecto de los bloques de texto -->
         <Style TargetType="TextBlock">
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontFamily" Value="Segoe Print"/>
         </Style>
         
@@ -72,19 +75,33 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Button x:Name="ButtonTopLeft" Grid.Row="0" Grid.Column="0" Content="" Click="ButtonClick"/>
-            <Button x:Name="ButtonTopCenter" Grid.Row="0" Grid.Column="1" Content="" Click="ButtonClick"/>
-            <Button x:Name="ButtonTopRight" Grid.Row="0" Grid.Column="2" Content="" Click="ButtonClick"/>
+            <Button x:Name="ButtonTopLeft" Grid.Row="0" Grid.Column="0"/>
+            <Button x:Name="ButtonTopCenter" Grid.Row="0" Grid.Column="1"/>
+            <Button x:Name="ButtonTopRight" Grid.Row="0" Grid.Column="2"/>
 
-            <Button x:Name="ButtonMiddleLeft" Grid.Row="1" Grid.Column="0" Content="" Click="ButtonClick"/>
-            <Button x:Name="ButtonMiddleCenter" Grid.Row="1" Grid.Column="1" Content="" Click="ButtonClick"/>
-            <Button x:Name="ButtonMiddleRight" Grid.Row="1" Grid.Column="2" Content="" Click="ButtonClick"/>
+            <Button x:Name="ButtonMiddleLeft" Grid.Row="1" Grid.Column="0"/>
+            <Button x:Name="ButtonMiddleCenter" Grid.Row="1" Grid.Column="1"/>
+            <Button x:Name="ButtonMiddleRight" Grid.Row="1" Grid.Column="2"/>
 
-            <Button x:Name="ButtonBottomLeft" Grid.Row="2" Grid.Column="0" Content="" Click="ButtonClick"/>
-            <Button x:Name="ButtonBottomCenter" Grid.Row="2" Grid.Column="1" Content="" Click="ButtonClick"/>
-            <Button x:Name="ButtonBottomRight" Grid.Row="2" Grid.Column="2" Content="" Click="ButtonClick"/>
+            <Button x:Name="ButtonBottomLeft" Grid.Row="2" Grid.Column="0"/>
+            <Button x:Name="ButtonBottomCenter" Grid.Row="2" Grid.Column="1"/>
+            <Button x:Name="ButtonBottomRight" Grid.Row="2" Grid.Column="2"/>
 
         </Grid>
+
+        <StackPanel Margin="0 20 0 0" Orientation="Horizontal" HorizontalAlignment="Center">
+
+            <Button Margin="5" Padding="5"
+                    Content="Reiniciar" 
+                    ToolTip="Vuelve a comenzar la partida"
+                    FontSize="14"/>
+
+            <Button Margin="5" Padding="5"
+                    Content="Volver" 
+                    ToolTip="Vuelve al menu principal"
+                    FontSize="14"/>
+
+        </StackPanel>
         
     </StackPanel>
 
