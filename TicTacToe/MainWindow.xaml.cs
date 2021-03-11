@@ -16,6 +16,13 @@ namespace TicTacToe
         public MainWindow()
         {
             InitializeComponent();
+            
+            DataContext = new
+            {
+                jugador1 = new Jugador() { Nombre = "Juan Manuel" },
+                jugador2 = new Jugador() { Nombre = "Brenda Belén" }
+            };
+
             NuevaPartida();
         }
 

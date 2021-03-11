@@ -7,23 +7,58 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         Background="GhostWhite"
+        WindowStartupLocation="CenterScreen"
         Title="Ta Te Ti" Height="350" Width="300">
 
-    <!-- -->
     <Window.Resources>
         
+        <!-- Apariencia de los botones -->
         <Style TargetType="Button">
             <Setter Property="Background" Value="GhostWhite"/>
             <Setter Property="BorderThickness" Value="0.5"/>
             <Setter Property="FontSize" Value="32"/>
         </Style>
+
+        <!-- Apariencia del texto -->
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontFamily" Value="Segoe Print"/>
+        </Style>
         
     </Window.Resources>
-    
-    <!-- -->
-    <Border Margin="20">
-        
-        <Grid x:Name="Board">
+
+    <!-- Container para los grid -->
+    <StackPanel>
+
+        <!-- Información de los jugadores y el puntaje -->
+        <Grid x:Name="Info" Margin="20">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding jugador1.Nombre}"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Text="{Binding jugador1.Puntaje}"/>
+            
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="VS"/>
+            
+            <TextBlock Grid.Row="0" Grid.Column="4" Text="{Binding jugador2.Nombre}"/>
+            <TextBlock Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" Text="{Binding jugador2.Puntaje}"/>
+
+
+        </Grid>
+
+        <!-- Tablero -->
+        <Grid x:Name="Board" Margin="20 0 20 0">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -51,7 +86,6 @@
 
         </Grid>
         
-    </Border>
+    </StackPanel>
 
-    
 </Window>
