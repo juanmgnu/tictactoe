@@ -12,14 +12,32 @@ using System.Windows.Shapes;
 
 namespace TicTacToe
 {
-    /// <summary>
-    /// Lógica de interacción para Welcome.xaml
-    /// </summary>
     public partial class Welcome : Window
     {
         public Welcome()
         {
             InitializeComponent();
+        }
+
+        private void ButtonClick(object sender, RoutedEventArgs e)
+        {
+            Button boton = (Button)sender;
+
+            if (boton.Name == "botonJvJ")
+            {
+                MainWindow mw = new MainWindow();
+                mw.Show();
+                Close();
+            }
+            else if (boton.Name == "botonJvC")
+            {
+
+            }
+            else
+            {
+                Close();
+            }
+
         }
     }
 }
