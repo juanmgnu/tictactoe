@@ -6,8 +6,17 @@
         xmlns:local="clr-namespace:TicTacToe"
         mc:Ignorable="d"
         Background="PaleGoldenrod"
-        Title="PlayerVsPlayerWindow" Height="250" Width="450">
+        WindowStartupLocation="CenterScreen"
+        Title="PlayerVsPlayerWindow" Height="300" Width="450">
 
+    <Window.Resources>
+
+        <Style TargetType="Button">
+            <EventSetter Event="Click" Handler="ButtonClick"/>
+        </Style>
+        
+    </Window.Resources>
+    
     <StackPanel Margin="20">
         
         <TextBlock Margin="10 0 10 20" 
@@ -37,9 +46,15 @@
                        FontWeight="DemiBold" FontSize="14"
                        Text="Nombre jugador 2 (O)"/>
 
-            <TextBox Grid.Row="0" Grid.Column="1" Margin="5"/>
+            <TextBox x:Name="textBoxJugador1" 
+                     Grid.Row="0" Grid.Column="1" 
+                     Margin="5"
+                     VerticalContentAlignment="Center"/>
             
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="5"/>
+            <TextBox x:Name="textBoxJugador2" 
+                     Grid.Row="1" Grid.Column="1" 
+                     Margin="5"
+                     VerticalContentAlignment="Center"/>
 
         </Grid>
 
@@ -48,12 +63,14 @@
                     HorizontalAlignment="Center"
                     Margin="0 30 0 0">
 
-            <Button Grid.Row="2" Grid.Column="1"
+            <Button x:Name="botonAceptar" 
+                    Grid.Row="2" Grid.Column="1"
                     Padding="5" Margin="4"
                     FontSize="14"
                     Content="Aceptar"/>
 
-            <Button Grid.Row="2" Grid.Column="2" 
+            <Button x:Name="botonCancelar" 
+                    Grid.Row="2" Grid.Column="2" 
                     Padding="5" Margin="4"
                     FontSize="14"
                     Content="Cancelar"/>

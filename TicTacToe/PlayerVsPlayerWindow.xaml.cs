@@ -18,5 +18,23 @@ namespace TicTacToe
         {
             InitializeComponent();
         }
+
+        private void ButtonClick(object sender, RoutedEventArgs e)
+        {
+            Button boton = (Button)sender;
+
+            if (boton.Name == "botonAceptar")
+            {
+                MainWindow mainWindow = new MainWindow(textBoxJugador1.Text, textBoxJugador2.Text);
+                mainWindow.Show();
+                Close();
+            }
+            else
+            {
+                WelcomeWindow welcomeWindow = new WelcomeWindow();
+                welcomeWindow.Show();
+                Close();
+            }
+        }
     }
 }

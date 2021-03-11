@@ -13,14 +13,14 @@ namespace TicTacToe
 
         private bool esTurnoDelHumano;
 
-        public MainWindow()
+        public MainWindow(string jugador1, string jugador2)
         {
             InitializeComponent();
             
             DataContext = new
             {
-                jugador1 = new Jugador() { Nombre = "Juan Manuel" },
-                jugador2 = new Jugador() { Nombre = "Brenda Belén" }
+                jugador1 = new Jugador() { Nombre = jugador1 },
+                jugador2 = new Jugador() { Nombre = jugador2 }
             };
 
             NuevaPartida();

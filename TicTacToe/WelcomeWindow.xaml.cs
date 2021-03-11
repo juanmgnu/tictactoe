@@ -25,8 +25,8 @@ namespace TicTacToe
 
             if (boton.Name == "botonJvJ")
             {
-                MainWindow mw = new MainWindow();
-                mw.Show();
+                PlayerVsPlayerWindow window = new PlayerVsPlayerWindow();
+                window.Show();
                 Close();
             }
             else if (boton.Name == "botonJvC")
