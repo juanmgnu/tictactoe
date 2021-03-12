@@ -9,7 +9,7 @@ namespace TicTacToe
     {
         private readonly Jugador jugador1;
         private readonly Jugador jugador2;
-        private Simbolo[,] matriz;
+        private string[,] matriz;
         private bool juegoTerminado;
         private bool turnoJugador1;
 
@@ -95,14 +95,14 @@ namespace TicTacToe
         private void NuevaPartida()
         {
             // Creo la matriz de 3x3.
-            matriz = new Simbolo[3, 3];
+            matriz = new string[3, 3];
 
             // Inicializo la matriz con el valor Vacio en todas sus posiciones.
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    matriz[i, j] = Simbolo.Vacio;
+                    matriz[i, j] = String.Empty;
                 }
             }
 
@@ -123,13 +123,13 @@ namespace TicTacToe
 
         private bool CasilleroLibre(int fila, int columna)
         {
-            return matriz[fila, columna] == Simbolo.Vacio;
+            return matriz[fila, columna] == String.Empty;
         }
 
         private void OcuparCasillero(Button boton, int fila, int columna)
         {
             // Ocupo el casillero con el símbolo que corresponda.
-            matriz[fila, columna] = turnoJugador1 ? Simbolo.X : Simbolo.O;
+            matriz[fila, columna] = turnoJugador1 ? "X" : "O";
 
             // Si es turno del jugador 1, el color es azul; si es turno del jugador 2, rojo.
             boton.Foreground = turnoJugador1 ? Brushes.CornflowerBlue : Brushes.PaleVioletRed;
@@ -150,7 +150,7 @@ namespace TicTacToe
             if (hayGanador)
             {
                 juegoTerminado = true;
-                Simbolo ganador = matriz[fila, columna];
+                string ganador = matriz[fila, columna];
 
                 if (linea == "horizontal")
                 {
@@ -186,7 +186,7 @@ namespace TicTacToe
             {
                 for (int c = 0; c < 3; c++)
                 {
-                    if (matriz[f, c] == Simbolo.Vacio)
+                    if (matriz[f, c] == string.Empty)
                     {
                         return false;
                     }
@@ -199,14 +199,14 @@ namespace TicTacToe
         private bool ChequearGanador(int fila, int columna, out string linea)
         {
             // Chequeo que las filas sean iguales (pero que no sean iguales a Vacio, sino a X o a O).
-            bool filaCompleta = matriz[fila, 0] != Simbolo.Vacio && (matriz[fila, 0] == matriz[fila, 1] && matriz[fila, 0] == matriz[fila, 2]);
+            bool filaCompleta = matriz[fila, 0] != String.Empty && (matriz[fila, 0] == matriz[fila, 1] && matriz[fila, 0] == matriz[fila, 2]);
 
             // Chequeo que las columnas sean iguales (pero que no sean iguales a Vacio, sino a X o a O).
-            bool columnaCompleta = matriz[0, columna] != Simbolo.Vacio && (matriz[0, columna] == matriz[1, columna] && matriz[0, columna] == matriz[2, columna]);
+            bool columnaCompleta = matriz[0, columna] != String.Empty && (matriz[0, columna] == matriz[1, columna] && matriz[0, columna] == matriz[2, columna]);
 
             // Chequeo que las diagonales sean iguales (pero que no sean iguales a Vacio, sino a X o a O).
-            bool diagonal1Completa = matriz[0, 0] != Simbolo.Vacio && (matriz[0, 0] == matriz[1, 1] && matriz[0, 0] == matriz[2, 2]);
-            bool diagonal2Completa = matriz[0, 2] != Simbolo.Vacio && (matriz[0, 2] == matriz[1, 1] && matriz[0, 2] == matriz[2, 0]);
+            bool diagonal1Completa = matriz[0, 0] != String.Empty && (matriz[0, 0] == matriz[1, 1] && matriz[0, 0] == matriz[2, 2]);
+            bool diagonal2Completa = matriz[0, 2] != String.Empty && (matriz[0, 2] == matriz[1, 1] && matriz[0, 2] == matriz[2, 0]);
 
             if (filaCompleta)
             {
@@ -233,13 +233,13 @@ namespace TicTacToe
             return false;
         }
 
-        private void SumarPuntoAlGanador(Simbolo simbolo)
+        private void SumarPuntoAlGanador(string simbolo)
         {
-            if (simbolo == Simbolo.X)
+            if (simbolo == "X")
             {
                 jugador1.Puntaje++;
             }
-            else if (simbolo == Simbolo.O)
+            else if (simbolo == "O")
             {
                 jugador2.Puntaje++;
             }
