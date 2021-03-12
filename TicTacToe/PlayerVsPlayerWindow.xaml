@@ -7,21 +7,39 @@
         mc:Ignorable="d"
         Background="PaleGoldenrod"
         WindowStartupLocation="CenterScreen"
-        Title="PlayerVsPlayerWindow" Height="300" Width="450">
+        Title="PlayerVsPlayerWindow" Height="400" Width="450">
 
     <Window.Resources>
 
         <Style TargetType="Button">
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontFamily" Value="Segoe Print"/>
             <EventSetter Event="Click" Handler="ButtonClick"/>
         </Style>
-        
+
+        <Style TargetType="TextBlock">
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontFamily" Value="Segoe Print"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontFamily" Value="Segoe Print"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
     </Window.Resources>
     
     <StackPanel Margin="20">
         
         <TextBlock Margin="10 0 10 20" 
                    HorizontalAlignment="Center"
-                   FontSize="24" FontWeight="Bold" FontFamily="Consolas"
+                   FontSize="24" 
                    Text="Jugador vs Jugador"/>
 
         <Grid>
@@ -37,24 +55,16 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Row="0" Grid.Column="0"
-                       Padding="5" Margin="5"
-                       FontWeight="DemiBold" FontSize="14"
                        Text="Nombre jugador 1 (X)"/>
 
             <TextBlock Grid.Row="1" Grid.Column="0"
-                       Padding="5" Margin="5"
-                       FontWeight="DemiBold" FontSize="14"
                        Text="Nombre jugador 2 (O)"/>
 
             <TextBox x:Name="textBoxJugador1" 
-                     Grid.Row="0" Grid.Column="1" 
-                     Margin="5"
-                     VerticalContentAlignment="Center"/>
+                     Grid.Row="0" Grid.Column="1"/>
             
             <TextBox x:Name="textBoxJugador2" 
-                     Grid.Row="1" Grid.Column="1" 
-                     Margin="5"
-                     VerticalContentAlignment="Center"/>
+                     Grid.Row="1" Grid.Column="1"/>
 
         </Grid>
 
@@ -65,14 +75,10 @@
 
             <Button x:Name="botonAceptar" 
                     Grid.Row="2" Grid.Column="1"
-                    Padding="5" Margin="4"
-                    FontSize="14"
                     Content="Aceptar"/>
 
             <Button x:Name="botonCancelar" 
                     Grid.Row="2" Grid.Column="2" 
-                    Padding="5" Margin="4"
-                    FontSize="14"
                     Content="Cancelar"/>
 
         </StackPanel>

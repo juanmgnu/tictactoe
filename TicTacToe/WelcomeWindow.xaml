@@ -8,21 +8,19 @@
         Background="PaleGoldenrod"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Title="Welcome" Height="300" Width="250">
+        Title="Welcome" Height="400" Width="350">
 
     <Window.Resources>
         
         <Style TargetType="Button">
-            
             <Setter Property="Margin" Value="5"/>
-            <Setter Property="Padding" Value="10 2 10 2"/>
+            <Setter Property="Padding" Value="10 5 10 5"/>
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="Background" Value="AliceBlue"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="FontFamily" Value="Consolas"/>
-            
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontFamily" Value="Segoe Print"/>
+            <Setter Property="FontWeight" Value="Normal"/>
             <EventSetter Event="Click" Handler="ButtonClick"/>
-            
         </Style>
         
     </Window.Resources>
@@ -33,7 +31,7 @@
         <TextBlock Padding="5"
                    HorizontalAlignment="Center"
                    FontFamily="Consolas"
-                   FontSize="24"
+                   FontSize="28"
                    Text="Tic Tac Toe" FontWeight="Bold"/>
         
         <TextBlock HorizontalAlignment="Center" 

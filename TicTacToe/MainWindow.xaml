@@ -8,17 +8,19 @@
         ResizeMode="NoResize"
         Background="PaleGoldenrod"
         WindowStartupLocation="CenterScreen"
-        Title="Ta Te Ti" Height="350" Width="300">
+        Title="Ta Te Ti" Height="450" Width="350">
 
     <Window.Resources>
         
         <!-- Apariencia por defecto de los botones -->
         <Style TargetType="Button">
+            <Setter Property="Padding" Value="5"/>
             <Setter Property="Background" Value="WhiteSmoke"/>
             <Setter Property="BorderThickness" Value="0.5"/>
+            <Setter Property="FontFamily" Value="Segoe Print"/>
+            <Setter Property="FontWeight" Value="Normal"/>
             <Setter Property="FontSize" Value="32"/>
             <Setter Property="Content" Value=""/>
-
             <EventSetter Event="Click" Handler="ButtonClick"/>
         </Style>
 
@@ -26,8 +28,9 @@
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontFamily" Value="Segoe Print"/>
+            <Setter Property="FontWeight" Value="Normal"/>
         </Style>
-        
+
     </Window.Resources>
 
     <!-- Container para los grid -->
@@ -94,12 +97,12 @@
             <Button Margin="5" Padding="5"
                     Content="Reiniciar" 
                     ToolTip="Vuelve a comenzar la partida"
-                    FontSize="14"/>
+                    FontSize="16"/>
 
             <Button Margin="5" Padding="5"
                     Content="Volver" 
                     ToolTip="Vuelve al menu principal"
-                    FontSize="14"/>
+                    FontSize="16"/>
 
         </StackPanel>
         
