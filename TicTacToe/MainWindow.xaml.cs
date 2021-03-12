@@ -20,8 +20,8 @@ namespace TicTacToe
         {
             InitializeComponent();
 
-            jugador1 = new Jugador() { Nombre = nombreJugador1, Puntaje = 0 };
-            jugador2 = new Jugador() { Nombre = nombreJugador2, Puntaje = 0 };
+            jugador1 = new Jugador(nombreJugador1);
+            jugador2 = new Jugador(nombreJugador2);
 
             DataContext = new
             {

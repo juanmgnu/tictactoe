@@ -6,10 +6,15 @@ namespace TicTacToe
     public class Jugador : INotifyPropertyChanged
     {
         private string nombre;
-
         private int puntaje;
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public Jugador(string nombre)
+        {
+            this.nombre = nombre;
+            puntaje = 0;
+        }
 
         public string Nombre
         {
@@ -20,7 +25,11 @@ namespace TicTacToe
         public int Puntaje
         {
             get { return puntaje; }
-            set { puntaje = value; NotifyPropertyChanged("Puntaje"); }
+            set 
+            { 
+                puntaje = value; 
+                NotifyPropertyChanged("Puntaje"); 
+            }
         }
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
