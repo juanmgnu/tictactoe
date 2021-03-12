@@ -25,9 +25,15 @@ namespace TicTacToe
 
             if (boton.Name == "botonAceptar")
             {
-                MainWindow mainWindow = new MainWindow(textBoxJugador1.Text, textBoxJugador2.Text);
-                mainWindow.Show();
-                Close();
+                string nombreJugador1 = textBoxJugador1.Text;
+                string nombreJugador2 = textBoxJugador2.Text;
+
+                if (!String.IsNullOrEmpty(nombreJugador1) && !String.IsNullOrEmpty(nombreJugador2))
+                {
+                    MainWindow mainWindow = new MainWindow(nombreJugador1, nombreJugador2);
+                    mainWindow.Show();
+                    Close();
+                }
             }
             else
             {

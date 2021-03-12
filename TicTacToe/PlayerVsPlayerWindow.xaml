@@ -32,6 +32,7 @@
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontFamily" Value="Segoe Print"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="MaxLength" Value="12"/>
         </Style>
 
     </Window.Resources>
