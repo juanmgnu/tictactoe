@@ -22,7 +22,7 @@ namespace TicTacToe
 
                 if (!String.IsNullOrEmpty(nombreJugador1) && !String.IsNullOrEmpty(nombreJugador2))
                 {
-                    MainWindow mainWindow = new MainWindow(nombreJugador1, nombreJugador2);
+                    MainWindow mainWindow = new MainWindow(new JugadorHumano(nombreJugador1), new JugadorHumano(nombreJugador2));
                     mainWindow.Show();
                     Close();
                 }

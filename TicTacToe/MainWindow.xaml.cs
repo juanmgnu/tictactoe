@@ -13,12 +13,12 @@ namespace TicTacToe
         private bool juegoTerminado;
         private bool turnoJugador1;
 
-        public MainWindow(string nombreJugador1, string nombreJugador2)
+        public MainWindow(Jugador j1, Jugador j2)
         {
             InitializeComponent();
 
-            jugador1 = new Jugador(nombreJugador1);
-            jugador2 = new Jugador(nombreJugador2);
+            jugador1 = j1;
+            jugador2 = j2;
 
             DataContext = new
             {
@@ -33,7 +33,7 @@ namespace TicTacToe
         {
             // Casteo el objeto que provocó el evento a Button.
             Button boton = (Button)sender;
-
+            
             // Si apreté el boton Reiniciar...
             if (boton.Name == "botonReiniciar")
             {
@@ -81,10 +81,10 @@ namespace TicTacToe
                 if (CasilleroLibre(fila, columna))
                 {
                     // Ocupo el lugar correspondiente.
-                    OcuparCasillero(fila, columna);
+                    OcuparCasillero(boton, fila, columna);
 
-                    // Actualizo tablero y turno.
-                    ActualizarEstadoDelJuego(boton);
+                    // Cambio el turno.
+                    turnoJugador1 = !turnoJugador1;
                 }
 
                 // Por último, chequeo si hay ganador.
@@ -126,22 +126,16 @@ namespace TicTacToe
             return matriz[fila, columna] == Simbolo.Vacio;
         }
 
-        private void OcuparCasillero(int fila, int columna)
+        private void OcuparCasillero(Button boton, int fila, int columna)
         {
             // Ocupo el casillero con el símbolo que corresponda.
             matriz[fila, columna] = turnoJugador1 ? Simbolo.X : Simbolo.O;
-        }
 
-        private void ActualizarEstadoDelJuego(Button boton)
-        {
             // Si es turno del jugador 1, el color es azul; si es turno del jugador 2, rojo.
             boton.Foreground = turnoJugador1 ? Brushes.CornflowerBlue : Brushes.PaleVioletRed;
 
             // Muestro el símbolo en el casillero marcado.
             boton.Content = turnoJugador1 ? "X" : "O";
-
-            // Actualizo el turno.
-            turnoJugador1 = !turnoJugador1;
         }
 
         private void ChequearResultado(int fila, int columna)

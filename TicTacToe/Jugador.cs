@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace TicTacToe
 {
-    public class Jugador : INotifyPropertyChanged
+    public abstract class Jugador : INotifyPropertyChanged
     {
         private string nombre;
         private int puntaje;

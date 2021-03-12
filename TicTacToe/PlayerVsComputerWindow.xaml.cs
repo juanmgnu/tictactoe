@@ -30,7 +30,7 @@ namespace TicTacToe
 
                 if (!String.IsNullOrEmpty(nombreJugador1))
                 {
-                    MainWindow mainWindow = new MainWindow(nombreJugador1, nombreJugador2);
+                    MainWindow mainWindow = new MainWindow(new JugadorHumano(nombreJugador1), new JugadorComputadora(nombreJugador2));
                     mainWindow.Show();
                     Close();
                 }
