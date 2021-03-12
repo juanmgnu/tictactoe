@@ -55,7 +55,7 @@
             <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding jugador1.Nombre}"/>
             <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Text="{Binding jugador1.Puntaje}"/>
             
-            <TextBlock Grid.Row="0" Grid.Column="2" Text="VS"/>
+            <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Text="VS"/>
             
             <TextBlock Grid.Row="0" Grid.Column="4" Text="{Binding jugador2.Nombre}"/>
             <TextBlock Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" Text="{Binding jugador2.Puntaje}"/>

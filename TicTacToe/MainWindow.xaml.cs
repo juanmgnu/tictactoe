@@ -37,6 +37,7 @@ namespace TicTacToe
             // Casteo el objeto que provocó el evento a Button.
             Button boton = (Button)sender;
 
+            // Si apreté el boton Reiniciar...
             if (boton.Name == "botonReiniciar")
             {
                 // Reseteo los puntajes.
@@ -46,29 +47,50 @@ namespace TicTacToe
                 // Inicio nueva partida.
                 NuevaPartida();
             }
+            // Si apreté el botón Volver...
             else if (boton.Name == "botonVolver")
             {
-                WelcomeWindow welcomeWindow = new WelcomeWindow();
-                welcomeWindow.Show();
-                Close();
+                string mensaje = "¿Volver al menu principal?";
+                string titulo = "Atención";
+
+                MessageBoxButton botones = MessageBoxButton.YesNo;
+                MessageBoxImage icono = MessageBoxImage.Warning;
+
+                MessageBoxResult resultado = MessageBox.Show(mensaje, titulo, botones, icono);
+
+                if (resultado == MessageBoxResult.Yes)
+                {
+                    WelcomeWindow welcomeWindow = new WelcomeWindow();
+                    welcomeWindow.Show();
+                    Close();
+                }
             }
+            // Si apreté otro botón, entonces estoy jugando.
             else
             {
-                // Si terminó el juego, inicio una nueva partida y retorno.
+                // Primero me fijo si ya había terminado el juego. Si es así, inicio una
+                // nueva partida y retorno. 
                 if (juegoTerminado)
                 {
                     NuevaPartida();
                     return;
                 }
 
-                // Obtengo las coordenadas del botón.
+                // Obtengo las coordenadas del botón que apreté.
                 int fila = Grid.GetRow(boton);
                 int columna = Grid.GetColumn(boton);
 
-                // Ocupo el casillero correspondiente.
-                OcuparCasillero(boton, fila, columna);
+                // Me fijo si el casillero que quiero ocupar está libre.
+                if (CasilleroLibre(fila, columna))
+                {
+                    // Ocupo el lugar correspondiente.
+                    OcuparCasillero(fila, columna);
 
-                // Chequeo si hay ganador.
+                    // Actualizo tablero y turno.
+                    ActualizarEstadoDelJuego(boton);
+                }
+
+                // Por último, chequeo si hay ganador.
                 ChequearGanador(fila, columna);
             }
         }
@@ -102,22 +124,27 @@ namespace TicTacToe
             }
         }
 
-        private void OcuparCasillero(Button boton, int fila, int columna)
+        private bool CasilleroLibre(int fila, int columna)
         {
-            // Ocupo el casillero con el símbolo que corresponda (sólo si está libre).
-            if (tablero[fila, columna] == Simbolo.Vacio)
-            {
-                tablero[fila, columna] = turnoJugador1 ? Simbolo.X : Simbolo.O;
+            return tablero[fila, columna] == Simbolo.Vacio;
+        }
 
-                // Si es turno del humano, el color es azul; si es turno de la máquina, rojo.
-                boton.Foreground = turnoJugador1 ? Brushes.CornflowerBlue : Brushes.PaleVioletRed;
+        private void OcuparCasillero(int fila, int columna)
+        {
+            // Ocupo el casillero con el símbolo que corresponda.
+            tablero[fila, columna] = turnoJugador1 ? Simbolo.X : Simbolo.O;
+        }
 
-                // Actualizo la propiedad Content del botón.
-                boton.Content = turnoJugador1 ? "X" : "O";
+        private void ActualizarEstadoDelJuego(Button boton)
+        {
+            // Si es turno del jugador 1, el color es azul; si es turno del jugador 2, rojo.
+            boton.Foreground = turnoJugador1 ? Brushes.CornflowerBlue : Brushes.PaleVioletRed;
 
-                // Actualizo el turno.
-                turnoJugador1 = !turnoJugador1;
-            }
+            // Muestro el símbolo en el casillero marcado.
+            boton.Content = turnoJugador1 ? "X" : "O";
+
+            // Actualizo el turno.
+            turnoJugador1 = !turnoJugador1;
         }
 
         private void ChequearGanador(int fila, int columna)
@@ -146,7 +173,7 @@ namespace TicTacToe
                 }
             }
 
-            // Si hay un ganador o es empate, retorno el Simbolo correspondiente
+            // Coloreo al ganador y le sumo un punto. Si es empate, coloreo todo el tablero y no sumo nada. 
             if (filaCompleta)
             {
                 juegoTerminado = true;
@@ -241,7 +268,6 @@ namespace TicTacToe
                 hijo.Background = Brushes.PaleTurquoise;
             }
         }
-
 
 
     }
