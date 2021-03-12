@@ -7,8 +7,8 @@ namespace TicTacToe
 {
     public partial class MainWindow : Window
     {
-        private Jugador jugador1;
-        private Jugador jugador2;
+        private readonly Jugador jugador1;
+        private readonly Jugador jugador2;
 
         private Simbolo[,] tablero;
 
