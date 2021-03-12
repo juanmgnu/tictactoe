@@ -94,12 +94,14 @@
 
         <StackPanel Margin="0 20 0 0" Orientation="Horizontal" HorizontalAlignment="Center">
 
-            <Button Margin="5" Padding="5"
+            <Button x:Name="botonReiniciar" 
+                    Margin="5"
                     Content="Reiniciar" 
                     ToolTip="Vuelve a comenzar la partida"
                     FontSize="16"/>
 
-            <Button Margin="5" Padding="5"
+            <Button x:Name="botonVolver" 
+                    Margin="5"
                     Content="Volver" 
                     ToolTip="Vuelve al menu principal"
                     FontSize="16"/>

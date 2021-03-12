@@ -14,7 +14,7 @@ namespace TicTacToe
 
         private bool juegoTerminado;
 
-        private bool esTurnoDelHumano;
+        private bool turnoJugador1;
 
         public MainWindow(string nombreJugador1, string nombreJugador2)
         {
@@ -34,40 +34,43 @@ namespace TicTacToe
 
         private void ButtonClick(object sender, RoutedEventArgs e)
         {
-            // Si terminó el juego, inicio una nueva partida y retorno.
-            if (juegoTerminado)
-            {
-                NuevaPartida();
-                return;
-            }
-
             // Casteo el objeto que provocó el evento a Button.
             Button boton = (Button)sender;
 
-            // Obtengo las coordenadas del botón.
-            int fila = Grid.GetRow(boton);
-            int columna = Grid.GetColumn(boton);
-
-            // Si la posición que quiero llenar está ocupada, no hago nada.
-            if (tablero[fila, columna] != Simbolo.Vacio)
+            if (boton.Name == "botonReiniciar")
             {
-                return;
+                // Reseteo los puntajes.
+                jugador1.Puntaje = 0;
+                jugador2.Puntaje = 0;
+
+                // Inicio nueva partida.
+                NuevaPartida();
             }
+            else if (boton.Name == "botonVolver")
+            {
+                WelcomeWindow welcomeWindow = new WelcomeWindow();
+                welcomeWindow.Show();
+                Close();
+            }
+            else
+            {
+                // Si terminó el juego, inicio una nueva partida y retorno.
+                if (juegoTerminado)
+                {
+                    NuevaPartida();
+                    return;
+                }
 
-            // Relleno la posición libre con el símbolo que corresponda.
-            tablero[fila, columna] = esTurnoDelHumano ? Simbolo.X : Simbolo.O;
+                // Obtengo las coordenadas del botón.
+                int fila = Grid.GetRow(boton);
+                int columna = Grid.GetColumn(boton);
 
-            // Si es turno del humano, el color es azul; si es turno de la máquina, rojo.
-            boton.Foreground = esTurnoDelHumano ? Brushes.CornflowerBlue : Brushes.PaleVioletRed;
+                // Ocupo el casillero correspondiente.
+                OcuparCasillero(boton, fila, columna);
 
-            // Actualizo la propiedad Content del botón.
-            boton.Content = esTurnoDelHumano ? "X" : "O";
-
-            // Actualizo el turno.
-            esTurnoDelHumano = !esTurnoDelHumano;
-
-            // Chequeo si hay ganador.
-            ChequearGanador(fila, columna);
+                // Chequeo si hay ganador.
+                ChequearGanador(fila, columna);
+            }
         }
 
         private void NuevaPartida()
@@ -84,8 +87,8 @@ namespace TicTacToe
                 }
             }
 
-            // El jugador humano comienza primero.
-            esTurnoDelHumano = true;
+            // El jugador 1 comienza primero.
+            turnoJugador1 = true;
 
             // Recién comienza el juego. 
             juegoTerminado = false;
@@ -96,6 +99,24 @@ namespace TicTacToe
             {
                 hijo.Content = String.Empty;
                 hijo.Background = Brushes.WhiteSmoke;
+            }
+        }
+
+        private void OcuparCasillero(Button boton, int fila, int columna)
+        {
+            // Ocupo el casillero con el símbolo que corresponda (sólo si está libre).
+            if (tablero[fila, columna] == Simbolo.Vacio)
+            {
+                tablero[fila, columna] = turnoJugador1 ? Simbolo.X : Simbolo.O;
+
+                // Si es turno del humano, el color es azul; si es turno de la máquina, rojo.
+                boton.Foreground = turnoJugador1 ? Brushes.CornflowerBlue : Brushes.PaleVioletRed;
+
+                // Actualizo la propiedad Content del botón.
+                boton.Content = turnoJugador1 ? "X" : "O";
+
+                // Actualizo el turno.
+                turnoJugador1 = !turnoJugador1;
             }
         }
 
