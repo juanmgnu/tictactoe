@@ -9,11 +9,8 @@ namespace TicTacToe
     {
         private readonly Jugador jugador1;
         private readonly Jugador jugador2;
-
         private Simbolo[,] matriz;
-
         private bool juegoTerminado;
-
         private bool turnoJugador1;
 
         public MainWindow(string nombreJugador1, string nombreJugador2)
@@ -160,7 +157,7 @@ namespace TicTacToe
             {
                 juegoTerminado = true;
                 Simbolo ganador = matriz[fila, columna];
-                
+
                 if (linea == "horizontal")
                 {
                     ColorearFila(fila);

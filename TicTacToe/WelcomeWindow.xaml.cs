@@ -22,7 +22,9 @@ namespace TicTacToe
             }
             else if (boton.Name == "botonJvC")
             {
-
+                PlayerVsComputerWindow window = new PlayerVsComputerWindow();
+                window.Show();
+                Close();
             }
             else
             {
@@ -39,8 +41,7 @@ namespace TicTacToe
                     Close();
                 }
             }
-
-
         }
+
     }
 }

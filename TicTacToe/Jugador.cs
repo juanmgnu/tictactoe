@@ -25,10 +25,10 @@ namespace TicTacToe
         public int Puntaje
         {
             get { return puntaje; }
-            set 
-            { 
-                puntaje = value; 
-                NotifyPropertyChanged("Puntaje"); 
+            set
+            {
+                puntaje = value;
+                NotifyPropertyChanged("Puntaje");
             }
         }
 
