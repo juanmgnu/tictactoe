@@ -10,7 +10,7 @@ namespace TicTacToe
         private readonly Jugador jugador1;
         private readonly Jugador jugador2;
 
-        private Simbolo[,] tablero;
+        private Simbolo[,] matriz;
 
         private bool juegoTerminado;
 
@@ -91,21 +91,21 @@ namespace TicTacToe
                 }
 
                 // Por último, chequeo si hay ganador.
-                ChequearGanador(fila, columna);
+                ChequearResultado(fila, columna);
             }
         }
 
         private void NuevaPartida()
         {
             // Creo la matriz de 3x3.
-            tablero = new Simbolo[3, 3];
+            matriz = new Simbolo[3, 3];
 
             // Inicializo la matriz con el valor Vacio en todas sus posiciones.
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    tablero[i, j] = Simbolo.Vacio;
+                    matriz[i, j] = Simbolo.Vacio;
                 }
             }
 
@@ -126,13 +126,13 @@ namespace TicTacToe
 
         private bool CasilleroLibre(int fila, int columna)
         {
-            return tablero[fila, columna] == Simbolo.Vacio;
+            return matriz[fila, columna] == Simbolo.Vacio;
         }
 
         private void OcuparCasillero(int fila, int columna)
         {
             // Ocupo el casillero con el símbolo que corresponda.
-            tablero[fila, columna] = turnoJugador1 ? Simbolo.X : Simbolo.O;
+            matriz[fila, columna] = turnoJugador1 ? Simbolo.X : Simbolo.O;
         }
 
         private void ActualizarEstadoDelJuego(Button boton)
@@ -147,62 +147,99 @@ namespace TicTacToe
             turnoJugador1 = !turnoJugador1;
         }
 
-        private void ChequearGanador(int fila, int columna)
+        private void ChequearResultado(int fila, int columna)
         {
-            // Chequeo que las filas sean iguales (pero que no sean iguales a Vacio, sino a X o a O).
-            bool filaCompleta = tablero[fila, 0] != Simbolo.Vacio && (tablero[fila, 0] == tablero[fila, 1] && tablero[fila, 0] == tablero[fila, 2]);
+            // Chequeo ganador (se formó alguna línea - vertical, horizontal, diagonal - con el mismo valor).
+            bool hayGanador = ChequearGanador(fila, columna, out string linea);
 
-            // Chequeo que las columnas sean iguales (pero que no sean iguales a Vacio, sino a X o a O).
-            bool columnaCompleta = tablero[0, columna] != Simbolo.Vacio && (tablero[0, columna] == tablero[1, columna] && tablero[0, columna] == tablero[2, columna]);
-
-            // Chequeo que las diagonales sean iguales (pero que no sean iguales a Vacio, sino a X o a O).
-            bool diagonal1Completa = tablero[0, 0] != Simbolo.Vacio && (tablero[0, 0] == tablero[1, 1] && tablero[0, 0] == tablero[2, 2]);
-            bool diagonal2Completa = tablero[0, 2] != Simbolo.Vacio && (tablero[0, 2] == tablero[1, 1] && tablero[0, 2] == tablero[2, 0]);
-
-            // Chequeo empate.
-            bool esEmpate = true;
-
-            for (int f = 0; f < 3; f++)
-            {
-                for (int c = 0; c < 3; c++)
-                {
-                    if (tablero[f, c] == Simbolo.Vacio)
-                    {
-                        esEmpate = false;
-                    }
-                }
-            }
+            // Chequeo empate (no hay ningún lugar vacío).
+            bool esEmpate = ChequearEmpate();
 
             // Coloreo al ganador y le sumo un punto. Si es empate, coloreo todo el tablero y no sumo nada. 
-            if (filaCompleta)
+            if (hayGanador)
             {
                 juegoTerminado = true;
-                ColorearFila(fila);
-                SumarPuntoAlGanador(tablero[fila, columna]);
-            }
-            else if (columnaCompleta)
-            {
-                juegoTerminado = true;
-                ColorearColumna(columna);
-                SumarPuntoAlGanador(tablero[fila, columna]);
-            }
-            else if (diagonal1Completa)
-            {
-                juegoTerminado = true;
-                ColorearDiagonal(1);
-                SumarPuntoAlGanador(tablero[fila, columna]);
-            }
-            else if (diagonal2Completa)
-            {
-                juegoTerminado = true;
-                ColorearDiagonal(2);
-                SumarPuntoAlGanador(tablero[fila, columna]);
+                Simbolo ganador = matriz[fila, columna];
+                
+                if (linea == "horizontal")
+                {
+                    ColorearFila(fila);
+                    SumarPuntoAlGanador(ganador);
+                }
+                else if (linea == "vertical")
+                {
+                    ColorearColumna(columna);
+                    SumarPuntoAlGanador(ganador);
+                }
+                else if (linea == "diagonal1")
+                {
+                    ColorearDiagonal(1);
+                    SumarPuntoAlGanador(ganador);
+                }
+                else if (linea == "diagonal2")
+                {
+                    ColorearDiagonal(2);
+                    SumarPuntoAlGanador(ganador);
+                }
             }
             else if (esEmpate)
             {
                 juegoTerminado = true;
                 ColorearEmpate();
             }
+        }
+
+        private bool ChequearEmpate()
+        {
+            for (int f = 0; f < 3; f++)
+            {
+                for (int c = 0; c < 3; c++)
+                {
+                    if (matriz[f, c] == Simbolo.Vacio)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        private bool ChequearGanador(int fila, int columna, out string linea)
+        {
+            // Chequeo que las filas sean iguales (pero que no sean iguales a Vacio, sino a X o a O).
+            bool filaCompleta = matriz[fila, 0] != Simbolo.Vacio && (matriz[fila, 0] == matriz[fila, 1] && matriz[fila, 0] == matriz[fila, 2]);
+
+            // Chequeo que las columnas sean iguales (pero que no sean iguales a Vacio, sino a X o a O).
+            bool columnaCompleta = matriz[0, columna] != Simbolo.Vacio && (matriz[0, columna] == matriz[1, columna] && matriz[0, columna] == matriz[2, columna]);
+
+            // Chequeo que las diagonales sean iguales (pero que no sean iguales a Vacio, sino a X o a O).
+            bool diagonal1Completa = matriz[0, 0] != Simbolo.Vacio && (matriz[0, 0] == matriz[1, 1] && matriz[0, 0] == matriz[2, 2]);
+            bool diagonal2Completa = matriz[0, 2] != Simbolo.Vacio && (matriz[0, 2] == matriz[1, 1] && matriz[0, 2] == matriz[2, 0]);
+
+            if (filaCompleta)
+            {
+                linea = "horizontal";
+                return true;
+            }
+            else if (columnaCompleta)
+            {
+                linea = "vertical";
+                return true;
+            }
+            else if (diagonal1Completa)
+            {
+                linea = "diagonal1";
+                return true;
+            }
+            else if (diagonal2Completa)
+            {
+                linea = "diagonal2";
+                return true;
+            }
+
+            linea = string.Empty;
+            return false;
         }
 
         private void SumarPuntoAlGanador(Simbolo simbolo)
