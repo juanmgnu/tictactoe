@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Background="PaleGoldenrod"
         WindowStartupLocation="CenterScreen"
-        Title="PlayerVsPlayerWindow" Height="400" Width="450">
+        Title="Jugador vs Jugador" Height="400" Width="450">
 
     <Window.Resources>
 

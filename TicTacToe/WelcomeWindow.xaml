@@ -8,7 +8,7 @@
         Background="PaleGoldenrod"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Title="Welcome" Height="400" Width="350">
+        Title="Bienvenido" Height="400" Width="350">
 
     <Window.Resources>
         
