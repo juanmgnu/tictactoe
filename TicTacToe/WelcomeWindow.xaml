@@ -31,15 +31,10 @@
         <TextBlock Padding="5"
                    HorizontalAlignment="Center"
                    FontFamily="Consolas"
-                   FontSize="28"
-                   Text="Tic Tac Toe" FontWeight="Bold"/>
+                   FontSize="30"
+                   Text="Tres en línea" FontWeight="Bold"/>
         
-        <TextBlock HorizontalAlignment="Center" 
-                   Text="by JMG" 
-                   FontFamily="Segoe Print" 
-                   FontWeight="Normal" 
-                   FontSize="14"/>
-        
+       
         <Grid Margin="0 40 0 0">
             
             <Grid.RowDefinitions>
