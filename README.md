@@ -2,7 +2,7 @@
 
 Repositorio para el juego "Tres en línea". 
 
-La idea de este proyecto es implementar el teorema minimax cuando se quiere jugar contra la computadora.
+Actualmente, se puede jugar contra otra persona. La idea de este proyecto es implementar (en un futuro) el teorema minimax cuando se quiere jugar contra la computadora.
 
 ### Ventana de bienvenida
 En esta ventana se puede seleccionar el modo de juego.
