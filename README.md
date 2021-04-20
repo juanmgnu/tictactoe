@@ -4,6 +4,7 @@ Repositorio para el juego "Tres en línea".
 
 Actualmente, se puede jugar contra otra persona. La idea de este proyecto es implementar (en un futuro) el teorema minimax cuando se quiere jugar contra la computadora.
 
+
 ### Ventana de bienvenida
 En esta ventana se puede seleccionar el modo de juego.
 
@@ -12,12 +13,14 @@ En esta ventana se puede seleccionar el modo de juego.
 </p>
 
 
+
 ### Jugador vs Jugador
 Los jugadores ingresan sus nombres.
   
 <p align="center">  
 <img src="screenshots/nombres.PNG">
 </p>
+
 
 
 ### Juego
